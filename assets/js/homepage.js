@@ -19,7 +19,7 @@ fetch("https://striveschool-api.herokuapp.com/api/product/", {
       card.classList.add("card", "shadow-lg", "border-0", "h-100");
       card.setAttribute("data-id", ele._id);
       const cardImg = document.createElement("img");
-      cardImg.classList.add("card-img-top", "img-fluid", "h-100");
+      cardImg.classList.add("card-img-top");
       cardImg.src = ele.imageUrl;
       const cardBody = document.createElement("div");
       cardBody.classList.add("card-body");
