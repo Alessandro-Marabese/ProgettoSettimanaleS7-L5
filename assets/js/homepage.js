@@ -16,7 +16,7 @@ fetch("https://striveschool-api.herokuapp.com/api/product/", {
       const col = document.createElement("div");
       col.classList.add("col");
       const card = document.createElement("div");
-      card.classList.add("card", "shadow-lg", "my-2");
+      card.classList.add("card", "shadow-lg", "my-2", "border-0");
       card.setAttribute("data-id", ele._id);
       const cardImg = document.createElement("img");
       cardImg.classList.add("card-img-top", "object-fit-contain");
