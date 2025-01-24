@@ -14,12 +14,12 @@ fetch("https://striveschool-api.herokuapp.com/api/product/", {
     const row = document.getElementById("indexRow");
     productobj.forEach((ele) => {
       const col = document.createElement("div");
-      col.classList.add("col");
+      col.classList.add("col", "mb-3");
       const card = document.createElement("div");
-      card.classList.add("card", "shadow-lg", "my-2", "border-0");
+      card.classList.add("card", "shadow-lg", "border-0", "h-100");
       card.setAttribute("data-id", ele._id);
       const cardImg = document.createElement("img");
-      cardImg.classList.add("card-img-top", "object-fit-contain");
+      cardImg.classList.add("card-img-top", "img-fluid", "h-100");
       cardImg.src = ele.imageUrl;
       const cardBody = document.createElement("div");
       cardBody.classList.add("card-body");
@@ -30,11 +30,11 @@ fetch("https://striveschool-api.herokuapp.com/api/product/", {
       priceParag.classList.add("card-text");
       priceParag.innerHTML = `${ele.price} €`;
       const modifyBtn = document.createElement("a");
-      modifyBtn.classList.add("btn", "btn-primary", "me-2");
+      modifyBtn.classList.add("btn", "btn-primary", "me-2", "mt-2");
       modifyBtn.innerText = "Modifica";
       modifyBtn.href = `./backoffice.html?_id=${ele._id}`;
       const detailsBtn = document.createElement("a");
-      detailsBtn.classList.add("btn", "btn-primary");
+      detailsBtn.classList.add("btn", "btn-primary", "mt-2", "align-middle");
       detailsBtn.innerText = "Vai al dettaglio";
       detailsBtn.href = `./detailspage.html?_id=${ele._id}`;
       card.appendChild(cardImg);
