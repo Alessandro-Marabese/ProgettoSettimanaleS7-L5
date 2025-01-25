@@ -42,14 +42,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 myForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const newProduct = {
-    name: myForm.elements.name.value.trim(),
-    description: myForm.elements.description.value.trim(),
-    brand: myForm.elements.brand.value.trim(),
-    imageUrl: myForm.elements.imageUrl.value.trim(),
-    price: parseFloat(myForm.elements.price.value.trim()),
-  };
-
   if (
     !myForm.elements.name.value ||
     !myForm.elements.description.value ||
@@ -60,6 +52,14 @@ myForm.addEventListener("submit", (event) => {
     alert("Tutti i campi devono essere compilati correttamente.");
     return;
   }
+  const newProduct = {
+    name: myForm.elements.name.value.trim(),
+    description: myForm.elements.description.value.trim(),
+    brand: myForm.elements.brand.value.trim(),
+    imageUrl: myForm.elements.imageUrl.value.trim(),
+    price: parseFloat(myForm.elements.price.value.trim()),
+  };
+
   console.log(newProduct);
 
   fetch(URL, {
@@ -92,20 +92,35 @@ myForm.addEventListener("submit", (event) => {
 });
 
 function deleteProduct() {
-  fetch(URL, {
-    headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkzNzU3MWI3NDcwMTAwMTU4YjJiYzYiLCJpYXQiOjE3Mzc3MTcxMDUsImV4cCI6MTczODkyNjcwNX0.DP65Mqtsa2k0LUzt3lZQS4396dpDJRC3LkWlFkedQDw",
-    },
-    method: "DELETE",
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
+  const userConfirm = confirm("Vuoi davvero eliminare questo appuntamento?");
+  if (userConfirm) {
+    fetch(URL, {
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzkzNzU3MWI3NDcwMTAwMTU4YjJiYzYiLCJpYXQiOjE3Mzc3MTcxMDUsImV4cCI6MTczODkyNjcwNX0.DP65Mqtsa2k0LUzt3lZQS4396dpDJRC3LkWlFkedQDw",
+      },
+      method: "DELETE",
     })
-    .then((eliminatedProduct) => {
-      alert("Il prodotto con id " + eliminatedProduct._id + "è stato eliminato con successo!");
-      window.location.href("./index.html");
-    });
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+      })
+      .then((eliminatedProduct) => {
+        alert("Il prodotto con id " + eliminatedProduct._id + "è stato eliminato con successo!");
+        window.location.href("./index.html");
+      });
+  } else {
+    return;
+  }
 }
+
+const resetButton = document.getElementById("resetBtn");
+resetButton.addEventListener("click", () => {
+  const userConfirm = confirm("Vuoi davvero resettare tutti campi?");
+  if (userConfirm) {
+    myForm.reset();
+  } else {
+    return;
+  }
+});
